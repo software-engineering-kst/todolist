@@ -2,10 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo List</title>
+    <link rel="stylesheet" href="theme.css" />
 </head>
 <body>
-    <h1>Hello world!</h1>
+
+  
+  <div class="container pt-5" id="app">
+    <div class="card">
+      <h1>{{title}}</h1>
+      <div class="form-control">
+        <input 
+          type="text" 
+          v-bind:placeholder="placeholderString" 
+          v-bind:value="inputValue" 
+          v-on:input="inputChangeHandler"
+        />
+      </div>
+      <button class="btn" v-on:click="addNewNote"> Добавить</button> 
+      <hr />
+      <ul class="list">
+        <li class="list-item" v-for="note in notes" >
+          {{note}}
+        </li>
+      </ul>
+    </div>
+  </div>
+    
+  
+  <!-- <h1>Hello world!</h1>
 
     <div id="content"></div>
 
@@ -24,6 +50,13 @@
           });
 
         document.getElementById("content").innerHTML += '</ul>';
-    </script>
+    </script> -->
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+    <script src="app.js"></script>
+    
 </body>
+
 </html>
