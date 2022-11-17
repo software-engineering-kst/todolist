@@ -1,23 +1,33 @@
 const App = {
     data() {
         return { 
-            counter: 0,
+            // counter: 0,
             title: 'Список задач',
             placeholderString: 'Введите название задачи',
             inputValue: '',
             notes: ['Заметка 1', 'Pfvtnrf']
         }
     },
-    metods: {
+    methods: {
         inputChangeHandler(event){
             this.inputValue = event.target.value 
         },
         addNewNote(){
-            this.notes.push(this.inputValue)
-            this.inputValue =''
+            if (this.inputValue !== ''){
+                this.notes.push(this.inputValue)
+                this.inputValue =''
+            }
+            
+        },
+        inputKeyPress(event){
+            if (event.key === 'Enter') {
+                this.addNewNote()
+            }
+        },
+        removeNote(idx){
+            this.notes.splice(idx,1)
         }
-    }
-    
+    }    
 }
  
 
