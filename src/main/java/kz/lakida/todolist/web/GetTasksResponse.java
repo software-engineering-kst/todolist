@@ -8,4 +8,5 @@ import java.util.List;
 @Data
 public class GetTasksResponse {
     private final List<Task> tasks;
+
 }
