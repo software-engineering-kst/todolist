@@ -19,7 +19,6 @@ public class TaskController {
 
     @GetMapping
     public ResponseEntity<GetTasksResponse> getAllTasks() {
-//        var tasks = List.of(new Task("Task 1", UUID.randomUUID()), new Task("Task 2", UUID.randomUUID()));
         return ResponseEntity.ok(new GetTasksResponse(taskService.findAll()));
     }
 
@@ -30,7 +29,7 @@ public class TaskController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping
+    @DeleteMapping
     @Transactional
     public ResponseEntity<String> deleteTask(@RequestBody Task task){
         taskService.deleteTask(task);
