@@ -1,7 +1,10 @@
 package kz.lakida.todolist.repository;
 
-public interface TaskRepository //extends JpaRepository<Task, UUID>
+import kz.lakida.todolist.model.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.UUID;
+
+public interface TaskRepository extends JpaRepository<Task, UUID>
 {
-    Sring name;
-    Print Scernnn d isdfa[sd fl[kasldkf jsal;dk jfdsalkj l;kfj]]
+
 }

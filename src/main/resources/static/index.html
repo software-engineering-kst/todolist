@@ -4,23 +4,25 @@
     <meta charset="UTF-8">
     <title>ToDo List</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdeliver.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
     <title>To-do-app</title>
 </head>
+
 <body>
   <div id="app">
     <div class="stats">
-        <h3 class="stats__title">Текущие задачи:</h3>
+        <h3 class="stats__title">{{"Текущие задачи: "+tasks.length }}</h3>
+        <task @task_done = "delete_task(index)":data = "data" v-for="(data,index) in tasks" :key="index"></task>
+    </div>
+    <div class="add_task">
+      <div class="add_task__input"> 
+          <input type="text" v-model="new_task.title" placeholder="Новая задача">
+          <textarea v-model = "new_task.desc" placeholder="Описание"></textarea>
+        </div>
+      <button @click="add_task()" class="add_task__btn">➕</button>
     </div>
   </div>
 
 </body>
 <script src="script.js"></script>
 </html>
-<div class="task">
-  <div>
-    <h3 class="task__title"></h3>
-    <p class="task__desc"></p>
-  </div>
-  <button class="task__done">✅</button>
-</div>

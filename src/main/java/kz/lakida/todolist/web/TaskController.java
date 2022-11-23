@@ -1,14 +1,13 @@
 package kz.lakida.todolist.web;
 
-        import kz.lakida.todolist.model.Task;
-        import kz.lakida.todolist.repository.TaskRepository;
-        import kz.lakida.todolist.service.TaskService;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.*;
+import kz.lakida.todolist.model.Task;
+import kz.lakida.todolist.repository.TaskRepository;
+import kz.lakida.todolist.service.TaskService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-        import java.util.List;
+import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
@@ -19,6 +18,7 @@ public class TaskController {
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
+
     @Autowired
     private TaskRepository taskRepository;
 
@@ -39,8 +39,8 @@ public class TaskController {
 
     @PostMapping("/update")
     public String update(@ModelAttribute GetTasksResponse getTasksResponse) {
-        for (Task requestItem : getTasksResponse.getTaskList() ) {
-            Task item = new Task( requestItem.getTitle());
+        for (Task requestItem : getTasksResponse.getTaskList()) {
+            Task item = new Task(requestItem.getTitle());
             item.setDone(requestItem.getDone());
             item.setId(requestItem.getId());
             taskService.saveTask(item);
