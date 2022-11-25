@@ -17,8 +17,7 @@ async function getList() {
      let response = await fetch('http://localhost:8080/tasks');
      if (response.ok) {
        let data = await response.json();
-       console.log(data);
-       return data
+       return data.tasks;
      } else {
        alert('error', response.status);
      }
@@ -26,14 +25,18 @@ async function getList() {
 
 const App = {
     data() {
-        return { 
-            // counter: 0,
+        return {
             title: 'Список задач',
             placeholderString: 'Введите название задачи',
             inputValue: '',
-            notes: getList()
-//            ['Заметка 1', 'Заметка 2']
+            notes: []
         }
+    },
+    mounted() {
+        let promise = getList();
+        promise.then((tasks) => {
+            this.notes = tasks
+        });
     },
     methods: {
         inputChangeHandler(event){
@@ -50,11 +53,16 @@ const App = {
                     body: JSON.stringify({id: createUUID(), name: this.inputValue})
                 })
                   .then((response) => {
+                    this.inputValue =''
                     console.log(response);
+                    let promise = getList();
+                    promise.then((tasks) => {
+                        this.notes = tasks
+                    });
                   });
-                this.inputValue =''
+
+
             }
-            //getList()
         },
         inputKeyPress(event){
             if (event.key === 'Enter') {
@@ -62,10 +70,24 @@ const App = {
             }
         },
         removeNote(idx){
-            this.notes.splice(idx,1)
+            fetch("http://localhost:8080/tasks",
+            {
+                method: 'DELETE',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: idx })
+            })
+              .then((response) => {
+                console.log(response);
+                let promise = getList();
+                promise.then((tasks) => {
+                    this.notes = tasks
+                });
+              });
+
         }
     }    
 }
- 
 
 Vue.createApp(App).mount('#app')
