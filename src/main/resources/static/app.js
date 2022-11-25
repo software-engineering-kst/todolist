@@ -13,6 +13,17 @@ function createUUID() {
     return uuid;
 }
 
+async function getList() {
+     let response = await fetch('http://localhost:8080/tasks');
+     if (response.ok) {
+       let data = await response.json();
+       console.log(data);
+       return data
+     } else {
+       alert('error', response.status);
+     }
+}
+
 const App = {
     data() {
         return { 
@@ -20,7 +31,8 @@ const App = {
             title: 'Список задач',
             placeholderString: 'Введите название задачи',
             inputValue: '',
-            notes: ['Заметка 1', 'Pfvtnrf']
+            notes: getList()
+//            ['Заметка 1', 'Заметка 2']
         }
     },
     methods: {
@@ -42,7 +54,7 @@ const App = {
                   });
                 this.inputValue =''
             }
-            
+            //getList()
         },
         inputKeyPress(event){
             if (event.key === 'Enter') {
