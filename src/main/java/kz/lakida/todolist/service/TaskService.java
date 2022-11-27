@@ -2,9 +2,11 @@ package kz.lakida.todolist.service;
 
 import kz.lakida.todolist.model.Task;
 import kz.lakida.todolist.repository.TaskRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TaskService {
@@ -14,21 +16,15 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public void createUser(Task task) {
-        // if (task == null ) throw new RuntimeException("Task is null");
-        taskRepository.save(task);
+    public void createTask (Task task){
+        if(task.getTitle() == null || task.getTitle().length()<1) throw new RuntimeException("Task is not correct");
     }
 
     public List<Task> findAll() {
-        var list = new ArrayList<Task>();
-        for (Task task : taskRepository.findAll()) {
-            list.add(task);
-        }
-        return list;
+        return taskRepository.findAll();
     }
 
-    public void saveTask(Task task) {
-        if (task == null) throw new RuntimeException("User name is invalid");
-        taskRepository.save(task);
+    public void deleteTask(UUID id){
+        taskRepository.deleteById(id);
     }
 }
