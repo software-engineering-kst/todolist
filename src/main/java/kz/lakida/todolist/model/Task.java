@@ -14,5 +14,5 @@ public class Task {
     @Id
     private UUID id;
     private String title;
-    private String desc;
+    private String description;
 }
