@@ -6,25 +6,6 @@ import java.util.List;
 
 @Data
 public class GetTasksResponse {
+    private final List<Task> tasks;
 
-    private List<Task> taskList;
-
-    public GetTasksResponse() {
-    }
-
-    public GetTasksResponse(List<Task> taskList) {
-        this.taskList = taskList;
-    }
-
-    public List<Task> getTaskList() {
-        return taskList;
-    }
-
-    public GetTasksResponse(Iterable<Task> items) {
-        items.forEach(taskList::add);
-    }
-
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
-    }
 }

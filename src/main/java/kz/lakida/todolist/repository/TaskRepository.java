@@ -1,10 +1,13 @@
 package kz.lakida.todolist.repository;
 
-import kz.lakida.todolist.model.Task;
-import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface TaskRepository extends JpaRepository<Task, UUID>
-{
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.scheduling.config.Task;
+import org.springframework.stereotype.Repository;
 
+@Repository
+public interface TaskRepository extends JpaRepository<Task, UUID>
+
+{
 }

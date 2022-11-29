@@ -21,7 +21,7 @@ public class TaskService {
     }
 
     public List<Task> findAll() {
-        return taskRepository.findAll();
+        return taskRepository.findAll() ;
     }
 
     public void deleteTask(UUID id){

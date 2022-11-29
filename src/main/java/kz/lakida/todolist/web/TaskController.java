@@ -28,7 +28,7 @@ public class TaskController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<String> deleteTask(@RequestBody Task task) {
+    public ResponseEntity<String> createTask(@RequestBody Task task) {
         taskService.createTask(task);
         return ResponseEntity.ok().build();
     }

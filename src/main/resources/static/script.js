@@ -52,11 +52,11 @@ var vue  = new Vue({
         tasks:[
             {
                 title: 'some task',
-                description:'some desc'
+                description:'some description',
             },
             {
                 title:'some other task',
-                description:'some other desc'
+                description:'some other description'
             }
         ]
     },
@@ -96,4 +96,5 @@ var vue  = new Vue({
             }
         }
     },
+}
 });
