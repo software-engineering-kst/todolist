@@ -14,49 +14,49 @@ function createUUID() {
 }
 
 async function getList() {
-     let response = await fetch('http://localhost:8080/tasks');
-     if (response.ok) {
-       let data = await response.json();
-       return data.tasks;
-     } else {
-       alert('error', response.status);
-     }
+    let response = await fetch('http://localhost:8080/tasks');
+    if (response.ok) {
+        let data = await response.json();
+        return data.tasks;
+    } else {
+        alert('error', response.status);
+    }
 }
 
 Vue.component("task", {
-    props:["data"],
-    methods:{
-        task_done(){
+    props: ["data"],
+    methods: {
+        task_done() {
             this.$emit("task_done", this.data);
 
         }
     },
-    template:`
+    template: `
     <div class="task">
         <div>
             <h3 class="task__title">{{data.title}}</h3>
-            <p class="task__desc">{{data.description}}</p>
+            <p class="task__desc">{{data.sub}}</p>
         </div>
         <button @click="task_done()" class="task__done">✅</button>
     </div>
     `
 });
 
-var vue  = new Vue({
-    el:'#app',
+var vue = new Vue({
+    el: '#app',
     data: {
         new_task: {
-            title:'',
-            description:''
+            title: '',
+            sub: ''
         },
-        tasks:[
+        tasks: [
             {
                 title: 'some task',
-                description:'some description',
+                sub: 'some sub',
             },
             {
-                title:'some other task',
-                description:'some other description'
+                title: 'some other task',
+                sub: 'some other sub'
             }
         ]
     },
@@ -67,34 +67,32 @@ var vue  = new Vue({
         });
     },
     methods: {
-        methods: {
-            inputChangeHandler(event){
-                this.new_task = event.target.value 
+            inputChangeHandler(event) {
+                this.new_task = event.target.value
             },
-            delete_task(id){
-            this.tasks.splice(id,1);
+            delete_task(id) {
+                this.tasks.splice(id, 1);
             },
-            add_task(){
-            if(this.new_task.title!=''){
-                fetch("http://localhost:8080/tasks",
-                {
-                    methods: 'POST',
-                        headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body:JSON.stringify({id:createUUID(),title: this.new_task.title, description: this.new_task.description})
-                })
-                .then((response) => {
-                    this.new_task.title='';
-                    this.new_task.description='';
-                    console.log(response);
-                    let promise = getList();
-                    promise.then((tasks) => {
-                        this.tasks = tasks
-                    });
-                  });
+            add_task() {
+                if (this.new_task.title != '') {
+                    fetch("http://localhost:8080/tasks",
+                        {
+                            methods: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ id: createUUID(), title: this.new_task.title, sub: this.new_task.sub })
+                        })
+                        .then((response) => {
+                            this.new_task.title = '';
+                            this.new_task.sub = '';
+                            console.log(response);
+                            let promise = getList();
+                            promise.then((tasks) => {
+                                this.tasks = tasks
+                            });
+                        });
+                }
             }
-        }
-    },
-}
+    }
 });

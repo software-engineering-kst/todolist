@@ -16,15 +16,16 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public void createTask (Task task){
-        if(task.getTitle() == null || task.getTitle().length()<1) throw new RuntimeException("Task is not correct");
+    public void createTask(Task task) {
+        if (task.getTitle() == null || task.getTitle().length() < 1)
+            throw new RuntimeException("Task is not correct");
     }
 
     public List<Task> findAll() {
-        return taskRepository.findAll() ;
+        return taskRepository.findAll();
     }
 
-    public void deleteTask(UUID id){
+    public void deleteTask(UUID id) {
         taskRepository.deleteById(id);
     }
 }

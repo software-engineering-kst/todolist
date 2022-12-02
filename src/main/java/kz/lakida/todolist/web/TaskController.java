@@ -20,7 +20,6 @@ public class TaskController {
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
-
     @GetMapping
     public ResponseEntity<GetTasksResponse> getAllTasks() {
         return ResponseEntity.ok(new GetTasksResponse(taskService.findAll()));
